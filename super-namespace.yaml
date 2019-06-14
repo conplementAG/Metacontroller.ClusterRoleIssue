@@ -1,0 +1,6 @@
+apiVersion: conplement.cloud/v1
+kind: SuperNamespace
+metadata:
+  name: test
+spec:
+  name: test-ns

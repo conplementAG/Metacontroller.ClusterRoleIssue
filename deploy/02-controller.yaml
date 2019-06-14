@@ -1,0 +1,22 @@
+apiVersion: metacontroller.k8s.io/v1alpha1
+kind: CompositeController
+metadata:
+  name: super-namespace-controller
+spec:
+  generateSelector: true
+  parentResource:
+    apiVersion: conplement.cloud/v1
+    resource: supernamespaces
+  childResources:
+  - apiVersion: v1
+    resource: namespaces
+    updateStrategy:
+      method: InPlace
+  - apiVersion: rbac.authorization.k8s.io/v1
+    resource: clusterroles
+    updateStrategy:
+      method: InPlace
+  hooks:
+    sync:
+      webhook:
+        url: http://super-namespace-controller.default/sync
