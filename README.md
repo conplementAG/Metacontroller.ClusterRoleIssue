@@ -1,6 +1,6 @@
 # Info
 
-Showcases the (Metacontroller)[https://github.com/GoogleCloudPlatform/metacontroller] infinite loop problem when using ClusterRole with namespace property. Of course, ClusterRole with a namespace is not valid k8s, but an infinite loop is not really helpful in finding out the issue. 
+Showcases the [Metacontroller](https://github.com/GoogleCloudPlatform/metacontroller) infinite loop problem when using ClusterRole with namespace property. Of course, ClusterRole with a namespace is not valid k8s, but an infinite loop is not really helpful in finding out the issue. 
 
 # How to reproduce
 
@@ -19,6 +19,7 @@ kubectl apply -f super-namespace.yaml
 
 You should see the metacontroller stuck in an infinite loop:
 
+```
 I0614 08:43:27.171177       1 controller.go:406] sync SuperNamespace /test
 I0614 08:43:27.175649       1 manage_children.go:171] SuperNamespace test: deleting ClusterRole test-ns-my-special-role
 I0614 08:43:27.365996       1 request.go:485] Throttling request took 190.228619ms, request: DELETE:https://172.20.0.1:443/apis/rbac.authorization.k8s.io/v1/clusterroles/test-ns-my-special-role
@@ -60,3 +61,4 @@ I0614 08:43:29.965832       1 request.go:485] Throttling request took 184.767322
 I0614 08:43:29.983982       1 controller.go:307] SuperNamespace /test: child ClusterRole test-ns-my-special-role created or updated
 I0614 08:43:30.165836       1 request.go:485] Throttling request took 181.898923ms, request: GET:https://172.20.0.1:443/apis/conplement.cloud/v1/supernamespaces/test
 I0614 08:43:30.184874       1 controller.go:406] sync SuperNamespace /test
+```
